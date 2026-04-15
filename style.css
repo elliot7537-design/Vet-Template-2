@@ -1143,11 +1143,165 @@ body:not(.lang-en) .lang-toggle__label:first-child { color: #fff; }
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity  0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
 }
 .reveal-on-scroll.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* Hero headline & hero chrome stagger on load */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(38px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero__tag       { animation: rise-in 0.8s cubic-bezier(0.22,0.61,0.36,1) both; animation-delay: 0.05s; }
+.hero__line      { animation: rise-in 0.9s cubic-bezier(0.22,0.61,0.36,1) both; }
+.hero__line:nth-child(1) { animation-delay: 0.15s; }
+.hero__line:nth-child(2) { animation-delay: 0.28s; }
+.hero__line:nth-child(3) { animation-delay: 0.41s; }
+.hero__line:nth-child(4) { animation-delay: 0.54s; }
+.hero__sub       { animation: rise-in 0.8s cubic-bezier(0.22,0.61,0.36,1) both; animation-delay: 0.70s; }
+.hero__cta       { animation: rise-in 0.8s cubic-bezier(0.22,0.61,0.36,1) both; animation-delay: 0.85s; }
+.hero__bg-text   { animation: fade-in 1.4s ease both; animation-delay: 0.1s; }
+
+/* Hero floating frames — gentle bob */
+@keyframes bob {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-14px); }
+}
+@keyframes bob-slow {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50%     { transform: translateY(-10px) rotate(1deg); }
+}
+.hero__float--cat  { animation: bob 6s ease-in-out infinite; }
+.hero__float--dog  { animation: bob-slow 7.5s ease-in-out infinite; }
+.hero__float--paw1 { animation: bob 5s ease-in-out infinite; animation-delay: -1.5s; }
+
+/* Marquee dots blink */
+@keyframes twinkle {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.35; }
+}
+.marquee__dot { animation: twinkle 2.2s ease-in-out infinite; }
+
+/* Service icons wiggle on card hover */
+@keyframes wiggle {
+  0%,100% { transform: rotate(0); }
+  25%     { transform: rotate(-10deg) scale(1.08); }
+  50%     { transform: rotate(8deg)  scale(1.12); }
+  75%     { transform: rotate(-4deg) scale(1.08); }
+}
+.service-card__icon { transition: transform 0.25s; display: inline-block; }
+.service-card:hover .service-card__icon { animation: wiggle 0.6s ease-in-out; }
+
+/* Philosophy cards — number slides on hover + subtle background sheen */
+.philosophy-card__num {
+  transition: transform 0.35s cubic-bezier(0.22,0.61,0.36,1), color 0.3s;
+}
+.philosophy-card:hover .philosophy-card__num {
+  transform: translateX(6px);
+  color: var(--red-dark);
+}
+.philosophy-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(214,59,31,0.06), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.philosophy-card:hover::after { opacity: 1; }
+
+/* Team cards — underline sweep on name + stronger lift */
+.team-card__body h3 {
+  position: relative;
+  display: inline-block;
+}
+.team-card__body h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--red);
+  transition: width 0.35s cubic-bezier(0.22,0.61,0.36,1);
+}
+.team-card:hover .team-card__body h3::after { width: 100%; }
+
+/* Family gallery — entrance + soft pulse ring on hover */
+.family-card {
+  transition: transform 0.3s cubic-bezier(0.22,0.61,0.36,1), box-shadow 0.3s;
+}
+.family-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.2);
+}
+
+/* Language toggle pill — subtle scale when pressed */
+.lang-toggle:active { transform: scale(0.96); }
+.lang-toggle { transition: transform 0.15s; }
+
+/* About gallery — soft shimmer placeholder while loading */
+.about__gallery-item,
+.team-card__img,
+.family-card {
+  position: relative;
+}
+.about__gallery-item::before,
+.team-card__img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg,
+    rgba(26,18,9,0.04) 25%,
+    rgba(26,18,9,0.10) 50%,
+    rgba(26,18,9,0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+  z-index: 0;
+}
+.about__gallery-item img,
+.team-card__img img {
+  position: relative;
+  z-index: 1;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Hours CTA — button pulse on the emergency call */
+@keyframes pulse-red {
+  0%,100% { box-shadow: 0 0 0 0 rgba(245,240,232,0.35); }
+  50%     { box-shadow: 0 0 0 12px rgba(245,240,232,0); }
+}
+.hours .btn--primary { animation: pulse-red 2.4s ease-out infinite; }
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ============================================

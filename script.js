@@ -605,10 +605,51 @@
     if (footerBottom[1]) footerBottom[1].id = 'footerCity';
   }
 
+  // ---- Image fallbacks (guarantee nothing renders blank) ----
+  function installImageFallbacks() {
+    // Team: fall back to another pravatar face if an avatar fails
+    const teamBackups = [
+      'https://i.pravatar.cc/600?u=vettj-1',
+      'https://i.pravatar.cc/600?u=vettj-2',
+      'https://i.pravatar.cc/600?u=vettj-3',
+      'https://i.pravatar.cc/600?u=vettj-4',
+    ];
+    document.querySelectorAll('.team-card img').forEach(function (img, i) {
+      img.addEventListener('error', function handle() {
+        img.removeEventListener('error', handle);
+        img.src = teamBackups[i % teamBackups.length];
+      });
+    });
+
+    // Family gallery: fall back to placedog.net (always returns a pet photo)
+    document.querySelectorAll('.family-card img').forEach(function (img, i) {
+      img.addEventListener('error', function handle() {
+        img.removeEventListener('error', handle);
+        const seed = img.dataset.fallbackSeed || ('pet' + i);
+        img.src = 'https://placedog.net/640/640?id=' + ((i * 13) % 200 + 1);
+        img.dataset.fellBack = seed;
+      });
+    });
+  }
+
+  // ---- Stagger scroll-reveal within grids ----
+  function applyStagger() {
+    const groups = document.querySelectorAll(
+      '.services__grid, .testimonials__grid, .philosophy__grid, .team__grid, .family__grid'
+    );
+    groups.forEach(function (grid) {
+      Array.from(grid.children).forEach(function (child, i) {
+        child.style.setProperty('--reveal-delay', (i * 90) + 'ms');
+      });
+    });
+  }
+
   // ---- Init ----
   document.addEventListener('DOMContentLoaded', function () {
     addIds();
     applyLanguage(currentLang);
+    installImageFallbacks();
+    applyStagger();
 
     // Language toggle button
     const toggle = document.getElementById('langToggle');
