@@ -71,7 +71,7 @@
       <a href="#servicios" class="btn btn--ghost" data-es="Ver Servicios" data-en="Our Services">Ver Servicios</a>
     </div>
 
-    <div class="hero__badge">
+    <div class="hero__badge" aria-hidden="true">
       <div class="hero__badge-inner">
         <span data-es="DESDE" data-en="SINCE">DESDE</span>
         <strong>2008</strong>
@@ -148,10 +148,18 @@
 
   <!-- ABOUT -->
   <section class="about" id="nosotros">
-    <div class="about__visual">
-      <div class="about__img-wrap">
-        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=1200&q=90" alt="Veterinarian with cat" class="about__img about__img--main" />
-        <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=700&q=90" alt="Happy dog" class="about__img about__img--accent" />
+    <div class="about__text">
+      <span class="label" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</span>
+      <h2 data-es="Cuidamos a tu<br><em>familia</em> entera." data-en="We care for your<br><em>whole</em> family.">Cuidamos a tu<br><em>familia</em> entera.</h2>
+      <p data-es="En VetTJ entendemos que tus mascotas son parte de tu familia. Ubicados en el corazón de Tijuana, atendemos a la comunidad fronteriza con calidez, profesionalismo y amor por los animales — tanto en español como en inglés." data-en="At VetTJ we understand your pets are part of your family. Located in the heart of Tijuana, we serve the border community with warmth, professionalism, and a love for animals — in both Spanish and English.">
+        En VetTJ entendemos que tus mascotas son parte de tu familia. Ubicados en el corazón de Tijuana, atendemos a la comunidad fronteriza con calidez, profesionalismo y amor por los animales — tanto en español como en inglés.
+      </p>
+      <p data-es="Nuestro equipo de veterinarios certificados está listo para brindar la mejor atención médica a perros y gatos, utilizando tecnología moderna y un trato humano." data-en="Our team of certified veterinarians is ready to provide the best medical care for dogs and cats, using modern technology and a compassionate approach.">
+        Nuestro equipo de veterinarios certificados está listo para brindar la mejor atención médica a perros y gatos, utilizando tecnología moderna y un trato humano.
+      </p>
+      <div class="about__flags">
+        <span class="flag-badge" data-es="🇲🇽 Atención en Español" data-en="🇲🇽 Spanish Available">🇲🇽 Atención en Español</span>
+        <span class="flag-badge" data-es="🇺🇸 English Spoken Here" data-en="🇺🇸 English Spoken Here">🇺🇸 English Spoken Here</span>
       </div>
       <div class="about__stat-block">
         <div class="about__stat">
@@ -169,19 +177,115 @@
       </div>
     </div>
 
-    <div class="about__text">
-      <span class="label" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</span>
-      <h2 data-es="Cuidamos a tu<br><em>familia</em> entera." data-en="We care for your<br><em>whole</em> family.">Cuidamos a tu<br><em>familia</em> entera.</h2>
-      <p data-es="En VetTJ entendemos que tus mascotas son parte de tu familia. Ubicados en el corazón de Tijuana, atendemos a la comunidad fronteriza con calidez, profesionalismo y amor por los animales — tanto en español como en inglés." data-en="At VetTJ we understand your pets are part of your family. Located in the heart of Tijuana, we serve the border community with warmth, professionalism, and a love for animals — in both Spanish and English.">
-        En VetTJ entendemos que tus mascotas son parte de tu familia. Ubicados en el corazón de Tijuana, atendemos a la comunidad fronteriza con calidez, profesionalismo y amor por los animales — tanto en español como en inglés.
-      </p>
-      <p data-es="Nuestro equipo de veterinarios certificados está listo para brindar la mejor atención médica a perros y gatos, utilizando tecnología moderna y un trato humano." data-en="Our team of certified veterinarians is ready to provide the best medical care for dogs and cats, using modern technology and a compassionate approach.">
-        Nuestro equipo de veterinarios certificados está listo para brindar la mejor atención médica a perros y gatos, utilizando tecnología moderna y un trato humano.
-      </p>
-      <div class="about__flags">
-        <span class="flag-badge" data-es="🇲🇽 Atención en Español" data-en="🇲🇽 Spanish Available">🇲🇽 Atención en Español</span>
-        <span class="flag-badge" data-es="🇺🇸 English Spoken Here" data-en="🇺🇸 English Spoken Here">🇺🇸 English Spoken Here</span>
+    <div class="about__gallery">
+      <div class="about__gallery-item about__gallery-item--tall">
+        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1000&q=90" alt="Veterinarian caring for a pet" />
       </div>
+      <div class="about__gallery-item">
+        <img src="https://images.unsplash.com/photo-1606425271850-350a25bb4e5a?w=800&q=90" alt="Modern veterinary clinic" />
+      </div>
+      <div class="about__gallery-item">
+        <img src="https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=800&q=90" alt="Happy pet with owner" />
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy" id="filosofia">
+    <div class="philosophy__header">
+      <span class="label" data-es="Nuestra Filosofía" data-en="Our Philosophy">Nuestra Filosofía</span>
+      <h2 data-es="Medicina con<br><em>corazón.</em>" data-en="Medicine with<br><em>heart.</em>">Medicina con<br><em>corazón.</em></h2>
+      <p class="philosophy__lead" data-es="Creemos que la medicina veterinaria es mucho más que diagnósticos — es confianza, empatía y compromiso con cada familia que cruza nuestras puertas." data-en="We believe veterinary medicine is much more than diagnoses — it's trust, empathy, and commitment to every family that walks through our doors.">
+        Creemos que la medicina veterinaria es mucho más que diagnósticos — es confianza, empatía y compromiso con cada familia que cruza nuestras puertas.
+      </p>
+    </div>
+    <div class="philosophy__grid">
+      <article class="philosophy-card">
+        <span class="philosophy-card__num">01</span>
+        <h3 data-es="Compasión primero" data-en="Compassion first">Compasión primero</h3>
+        <p data-es="Cada mascota es tratada con la misma ternura que daríamos a la nuestra. Escuchamos a los dueños y explicamos cada paso." data-en="Every pet is treated with the same tenderness we'd give our own. We listen to owners and explain every step along the way.">
+          Cada mascota es tratada con la misma ternura que daríamos a la nuestra. Escuchamos a los dueños y explicamos cada paso.
+        </p>
+      </article>
+      <article class="philosophy-card">
+        <span class="philosophy-card__num">02</span>
+        <h3 data-es="Honestidad radical" data-en="Radical honesty">Honestidad radical</h3>
+        <p data-es="Precios transparentes, diagnósticos claros y recomendaciones basadas sólo en lo que tu mascota realmente necesita." data-en="Transparent pricing, clear diagnoses, and recommendations based only on what your pet actually needs.">
+          Precios transparentes, diagnósticos claros y recomendaciones basadas sólo en lo que tu mascota realmente necesita.
+        </p>
+      </article>
+      <article class="philosophy-card">
+        <span class="philosophy-card__num">03</span>
+        <h3 data-es="Medicina moderna" data-en="Modern medicine">Medicina moderna</h3>
+        <p data-es="Equipo de diagnóstico digital, laboratorio propio y protocolos basados en la evidencia más reciente." data-en="Digital diagnostic equipment, in-house laboratory, and protocols grounded in the latest evidence.">
+          Equipo de diagnóstico digital, laboratorio propio y protocolos basados en la evidencia más reciente.
+        </p>
+      </article>
+      <article class="philosophy-card">
+        <span class="philosophy-card__num">04</span>
+        <h3 data-es="Bilingüe & cercano" data-en="Bilingual & close">Bilingüe & cercano</h3>
+        <p data-es="Atendemos en español e inglés, con el calor humano de Tijuana y la comunicación clara que tu familia merece." data-en="We serve in Spanish and English, with the warmth of Tijuana and the clear communication your family deserves.">
+          Atendemos en español e inglés, con el calor humano de Tijuana y la comunicación clara que tu familia merece.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team" id="equipo">
+    <div class="team__header">
+      <span class="label" data-es="Nuestro Equipo" data-en="Our Team">Nuestro Equipo</span>
+      <h2 data-es="Conoce a los<br><em>doctores.</em>" data-en="Meet the<br><em>doctors.</em>">Conoce a los<br><em>doctores.</em></h2>
+    </div>
+    <div class="team__grid">
+      <article class="team-card">
+        <div class="team-card__img">
+          <img src="https://images.unsplash.com/photo-1594824388853-d0ac57efbea8?w=800&q=90" alt="Dra. María López" />
+        </div>
+        <div class="team-card__body">
+          <h3>Dra. María López</h3>
+          <span class="team-card__role" data-es="Directora · Medicina Interna" data-en="Director · Internal Medicine">Directora · Medicina Interna</span>
+          <p data-es="15 años cuidando mascotas en Tijuana. Especialista en medicina felina y geriátrica." data-en="15 years caring for pets in Tijuana. Specialist in feline and geriatric medicine.">
+            15 años cuidando mascotas en Tijuana. Especialista en medicina felina y geriátrica.
+          </p>
+        </div>
+      </article>
+      <article class="team-card">
+        <div class="team-card__img">
+          <img src="https://images.unsplash.com/photo-1612349316228-5942a9b489c2?w=800&q=90" alt="Dr. Carlos Rivera" />
+        </div>
+        <div class="team-card__body">
+          <h3>Dr. Carlos Rivera</h3>
+          <span class="team-card__role" data-es="Cirujano Veterinario" data-en="Veterinary Surgeon">Cirujano Veterinario</span>
+          <p data-es="Formado en UNAM y UC Davis. Lidera nuestro quirófano con técnicas mínimamente invasivas." data-en="Trained at UNAM and UC Davis. Leads our surgery suite with minimally invasive techniques.">
+            Formado en UNAM y UC Davis. Lidera nuestro quirófano con técnicas mínimamente invasivas.
+          </p>
+        </div>
+      </article>
+      <article class="team-card">
+        <div class="team-card__img">
+          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=800&q=90" alt="Dra. Ana Torres" />
+        </div>
+        <div class="team-card__body">
+          <h3>Dra. Ana Torres</h3>
+          <span class="team-card__role" data-es="Dermatología & Nutrición" data-en="Dermatology &amp; Nutrition">Dermatología & Nutrición</span>
+          <p data-es="Alergias, piel y planes nutricionales personalizados para perros y gatos de todas las edades." data-en="Allergies, skin care and personalized nutrition plans for dogs and cats of all ages.">
+            Alergias, piel y planes nutricionales personalizados para perros y gatos de todas las edades.
+          </p>
+        </div>
+      </article>
+      <article class="team-card">
+        <div class="team-card__img">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=90" alt="Dr. James Whitfield" />
+        </div>
+        <div class="team-card__body">
+          <h3>Dr. James Whitfield</h3>
+          <span class="team-card__role" data-es="Urgencias & Cuidado Crítico" data-en="Emergency &amp; Critical Care">Urgencias & Cuidado Crítico</span>
+          <p data-es="Bilingüe, originario de San Diego. A cargo de nuestra línea de urgencias 24h." data-en="Bilingual, San Diego native. In charge of our 24h emergency line.">
+            Bilingüe, originario de San Diego. A cargo de nuestra línea de urgencias 24h.
+          </p>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -209,6 +313,75 @@
         <img src="https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?w=600&q=90" alt="Cat" />
         <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&q=90" alt="Cat 2" />
       </div>
+    </div>
+  </section>
+
+  <!-- FAMILY GALLERY -->
+  <section class="family" id="familia">
+    <div class="family__header">
+      <span class="label" data-es="Nuestra Familia" data-en="Our Family">Nuestra Familia</span>
+      <h2 data-es="Conoce a algunos de<br>nuestros <em>pacientes.</em>" data-en="Meet some of<br>our <em>patients.</em>">Conoce a algunos de<br>nuestros <em>pacientes.</em></h2>
+      <p class="family__lead" data-es="Cada mascota que pasa por nuestras puertas se convierte en parte de la familia VetTJ. Aquí algunos de los consentidos de la casa." data-en="Every pet that walks through our doors becomes part of the VetTJ family. Here are some of our favorite regulars.">
+        Cada mascota que pasa por nuestras puertas se convierte en parte de la familia VetTJ. Aquí algunos de los consentidos de la casa.
+      </p>
+    </div>
+    <div class="family__grid">
+      <figure class="family-card family-card--tall">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=700&q=90" alt="Luna" />
+        <figcaption>
+          <strong>Luna</strong>
+          <span data-es="Golden Retriever · 4 años" data-en="Golden Retriever · 4 yrs">Golden Retriever · 4 años</span>
+        </figcaption>
+      </figure>
+      <figure class="family-card">
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=90" alt="Mochi" />
+        <figcaption>
+          <strong>Mochi</strong>
+          <span data-es="Gato gris · 2 años" data-en="Gray cat · 2 yrs">Gato gris · 2 años</span>
+        </figcaption>
+      </figure>
+      <figure class="family-card">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=90" alt="Rocky" />
+        <figcaption>
+          <strong>Rocky</strong>
+          <span data-es="Bulldog · 5 años" data-en="Bulldog · 5 yrs">Bulldog · 5 años</span>
+        </figcaption>
+      </figure>
+      <figure class="family-card">
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600&q=90" alt="Max" />
+        <figcaption>
+          <strong>Max</strong>
+          <span data-es="Pastor Alemán · 3 años" data-en="German Shepherd · 3 yrs">Pastor Alemán · 3 años</span>
+        </figcaption>
+      </figure>
+      <figure class="family-card family-card--wide">
+        <img src="https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?w=900&q=90" alt="Biscuit" />
+        <figcaption>
+          <strong>Biscuit</strong>
+          <span data-es="Gato naranja · 6 años" data-en="Orange cat · 6 yrs">Gato naranja · 6 años</span>
+        </figcaption>
+      </figure>
+      <figure class="family-card">
+        <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=600&q=90" alt="Toby" />
+        <figcaption>
+          <strong>Toby</strong>
+          <span data-es="Mestizo rescatado · 7 años" data-en="Rescue mix · 7 yrs">Mestizo rescatado · 7 años</span>
+        </figcaption>
+      </figure>
+      <figure class="family-card">
+        <img src="https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?w=600&q=90" alt="Coco" />
+        <figcaption>
+          <strong>Coco</strong>
+          <span data-es="Labrador · 1 año" data-en="Labrador · 1 yr">Labrador · 1 año</span>
+        </figcaption>
+      </figure>
+      <figure class="family-card">
+        <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&q=90" alt="Mango" />
+        <figcaption>
+          <strong>Mango</strong>
+          <span data-es="Gato blanco · 8 años" data-en="White cat · 8 yrs">Gato blanco · 8 años</span>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
