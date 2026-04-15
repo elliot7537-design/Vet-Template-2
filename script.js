@@ -118,6 +118,44 @@
       svc5_p: 'Baño, corte de pelo y uñas para que tu mascota siempre luzca increíble.',
       svc6_h: 'Urgencias',
       svc6_p: 'Atención de emergencias veterinarias. Llámanos, estamos para ayudarte cuando más lo necesitas.',
+
+      // Philosophy
+      phil_label: 'Nuestra Filosofía',
+      phil_h2:    'Medicina con<br><em>corazón.</em>',
+      phil_lead:  'Creemos que la medicina veterinaria es mucho más que diagnósticos — es confianza, empatía y compromiso con cada familia que cruza nuestras puertas.',
+      phil1_h:    'Compasión primero',
+      phil1_p:    'Cada mascota es tratada con la misma ternura que daríamos a la nuestra. Escuchamos a los dueños y explicamos cada paso.',
+      phil2_h:    'Honestidad radical',
+      phil2_p:    'Precios transparentes, diagnósticos claros y recomendaciones basadas sólo en lo que tu mascota realmente necesita.',
+      phil3_h:    'Medicina moderna',
+      phil3_p:    'Equipo de diagnóstico digital, laboratorio propio y protocolos basados en la evidencia más reciente.',
+      phil4_h:    'Bilingüe & cercano',
+      phil4_p:    'Atendemos en español e inglés, con el calor humano de Tijuana y la comunicación clara que tu familia merece.',
+
+      // Team
+      team_label: 'Nuestro Equipo',
+      team_h2:    'Conoce a los<br><em>doctores.</em>',
+      team1_role: 'Directora · Medicina Interna',
+      team1_bio:  '15 años cuidando mascotas en Tijuana. Especialista en medicina felina y geriátrica.',
+      team2_role: 'Cirujano Veterinario',
+      team2_bio:  'Formado en UNAM y UC Davis. Lidera nuestro quirófano con técnicas mínimamente invasivas.',
+      team3_role: 'Dermatología & Nutrición',
+      team3_bio:  'Alergias, piel y planes nutricionales personalizados para perros y gatos de todas las edades.',
+      team4_role: 'Urgencias & Cuidado Crítico',
+      team4_bio:  'Bilingüe, originario de San Diego. A cargo de nuestra línea de urgencias 24h.',
+
+      // Family gallery
+      fam_label:  'Nuestra Familia',
+      fam_h2:     'Conoce a algunos de<br>nuestros <em>pacientes.</em>',
+      fam_lead:   'Cada mascota que pasa por nuestras puertas se convierte en parte de la familia VetTJ. Aquí algunos de los consentidos de la casa.',
+      fam1:       'Golden Retriever · 4 años',
+      fam2:       'Gato gris · 2 años',
+      fam3:       'Bulldog · 5 años',
+      fam4:       'Pastor Alemán · 3 años',
+      fam5:       'Gato naranja · 6 años',
+      fam6:       'Mestizo rescatado · 7 años',
+      fam7:       'Labrador · 1 año',
+      fam8:       'Gato blanco · 8 años',
     },
 
     en: {
@@ -218,6 +256,44 @@
       svc5_p: 'Bath, haircut, and nail trim so your pet always looks amazing.',
       svc6_h: 'Emergency',
       svc6_p: "Emergency veterinary care. Call us, we're here when you need us most.",
+
+      // Philosophy
+      phil_label: 'Our Philosophy',
+      phil_h2:    'Medicine with<br><em>heart.</em>',
+      phil_lead:  "We believe veterinary medicine is much more than diagnoses — it's trust, empathy, and commitment to every family that walks through our doors.",
+      phil1_h:    'Compassion first',
+      phil1_p:    "Every pet is treated with the same tenderness we'd give our own. We listen to owners and explain every step along the way.",
+      phil2_h:    'Radical honesty',
+      phil2_p:    'Transparent pricing, clear diagnoses, and recommendations based only on what your pet actually needs.',
+      phil3_h:    'Modern medicine',
+      phil3_p:    'Digital diagnostic equipment, in-house laboratory, and protocols grounded in the latest evidence.',
+      phil4_h:    'Bilingual & close',
+      phil4_p:    'We serve in Spanish and English, with the warmth of Tijuana and the clear communication your family deserves.',
+
+      // Team
+      team_label: 'Our Team',
+      team_h2:    'Meet the<br><em>doctors.</em>',
+      team1_role: 'Director · Internal Medicine',
+      team1_bio:  'With 15 years caring for pets in Tijuana. Specialist in feline and geriatric medicine.',
+      team2_role: 'Veterinary Surgeon',
+      team2_bio:  'Trained at UNAM and UC Davis. Leads our surgery suite with minimally invasive techniques.',
+      team3_role: 'Dermatology & Nutrition',
+      team3_bio:  'Allergies, skin care and personalized nutrition plans for dogs and cats of all ages.',
+      team4_role: 'Emergency & Critical Care',
+      team4_bio:  'Bilingual, San Diego native. In charge of our 24h emergency line.',
+
+      // Family gallery
+      fam_label:  'Our Family',
+      fam_h2:     'Meet some of<br>our <em>patients.</em>',
+      fam_lead:   'Every pet that walks through our doors becomes part of the VetTJ family. Here are some of our favorite regulars.',
+      fam1:       'Golden Retriever · 4 yrs',
+      fam2:       'Gray cat · 2 yrs',
+      fam3:       'Bulldog · 5 yrs',
+      fam4:       'German Shepherd · 3 yrs',
+      fam5:       'Orange cat · 6 yrs',
+      fam6:       'Rescue mix · 7 yrs',
+      fam7:       'Labrador · 1 yr',
+      fam8:       'White cat · 8 yrs',
     },
   };
 
@@ -270,6 +346,44 @@
     ['#dogsSub',    'textContent', 'dogs_sub'],
     ['#catsLabel',  'textContent', 'cats_label'],
     ['#catsSub',    'textContent', 'cats_sub'],
+
+    // Philosophy
+    ['.philosophy .label',        'textContent', 'phil_label'],
+    ['.philosophy__header h2',    'innerHTML',   'phil_h2'],
+    ['.philosophy__lead',         'textContent', 'phil_lead'],
+    ['#phil1h', 'textContent', 'phil1_h'],
+    ['#phil1p', 'textContent', 'phil1_p'],
+    ['#phil2h', 'textContent', 'phil2_h'],
+    ['#phil2p', 'textContent', 'phil2_p'],
+    ['#phil3h', 'textContent', 'phil3_h'],
+    ['#phil3p', 'textContent', 'phil3_p'],
+    ['#phil4h', 'textContent', 'phil4_h'],
+    ['#phil4p', 'textContent', 'phil4_p'],
+
+    // Team
+    ['.team .label',       'textContent', 'team_label'],
+    ['.team__header h2',   'innerHTML',   'team_h2'],
+    ['#team1Role', 'textContent', 'team1_role'],
+    ['#team1Bio',  'textContent', 'team1_bio'],
+    ['#team2Role', 'textContent', 'team2_role'],
+    ['#team2Bio',  'textContent', 'team2_bio'],
+    ['#team3Role', 'textContent', 'team3_role'],
+    ['#team3Bio',  'textContent', 'team3_bio'],
+    ['#team4Role', 'textContent', 'team4_role'],
+    ['#team4Bio',  'textContent', 'team4_bio'],
+
+    // Family gallery
+    ['.family .label',      'textContent', 'fam_label'],
+    ['.family__header h2',  'innerHTML',   'fam_h2'],
+    ['.family__lead',       'textContent', 'fam_lead'],
+    ['#fam1', 'textContent', 'fam1'],
+    ['#fam2', 'textContent', 'fam2'],
+    ['#fam3', 'textContent', 'fam3'],
+    ['#fam4', 'textContent', 'fam4'],
+    ['#fam5', 'textContent', 'fam5'],
+    ['#fam6', 'textContent', 'fam6'],
+    ['#fam7', 'textContent', 'fam7'],
+    ['#fam8', 'textContent', 'fam8'],
 
     // Hours
     ['.hours .label',     'textContent', 'hours_label'],
@@ -402,6 +516,32 @@
     if (pLabels[1]) pLabels[1].id = 'catsLabel';
     if (pSubs[1])   pSubs[1].id   = 'catsSub';
 
+    // Philosophy cards
+    const philCards = document.querySelectorAll('.philosophy-card');
+    philCards.forEach((card, i) => {
+      const n = i + 1;
+      const h = card.querySelector('h3');
+      const p = card.querySelector('p');
+      if (h) h.id = `phil${n}h`;
+      if (p) p.id = `phil${n}p`;
+    });
+
+    // Team cards
+    const teamCards = document.querySelectorAll('.team-card');
+    teamCards.forEach((card, i) => {
+      const n = i + 1;
+      const role = card.querySelector('.team-card__role');
+      const bio  = card.querySelector('.team-card__body p');
+      if (role) role.id = `team${n}Role`;
+      if (bio)  bio.id  = `team${n}Bio`;
+    });
+
+    // Family cards
+    const famSpans = document.querySelectorAll('.family-card figcaption span');
+    famSpans.forEach((el, i) => {
+      el.id = `fam${i + 1}`;
+    });
+
     // Hours
     const hoursPs = document.querySelectorAll('.hours__text p');
     if (hoursPs[0]) hoursPs[0].id = 'hoursP';
@@ -507,7 +647,7 @@
 
     // Scroll reveal (Intersection Observer)
     const revealEls = document.querySelectorAll(
-      '.service-card, .testimonial-card, .about__text, .about__visual, .hours__inner > *, .contact__info, .contact__form-wrap'
+      '.service-card, .testimonial-card, .about__text, .about__gallery, .philosophy-card, .team-card, .family-card, .hours__inner > *, .contact__info, .contact__form-wrap'
     );
 
     const observer = new IntersectionObserver(function (entries) {
