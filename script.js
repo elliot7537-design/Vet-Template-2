@@ -62,15 +62,6 @@
       cats_label:  'Gatos',
       cats_sub:    'Especialistas en felinos',
 
-      // Testimonials
-      test_label:  'Testimonios',
-      test_h2:     'Lo que dicen<br>nuestros clientes.',
-      test1_text:  '«El mejor veterinario en Tijuana. Atendieron a mi perro Luna con mucho cuidado y profesionalismo. Los recomiendo al 100%.»',
-      test1_pet:   'Mamá de Luna 🐕',
-      test2_text:  '«I drive from San Diego specifically for VetTJ. Their bilingual staff makes everything so easy, and my cats Mochi and Biscuit are in the best hands.»',
-      test3_text:  '«Llevé a mi gato Mango a una emergencia a las 11 de la noche y los doctores estuvieron ahí. Gracias por salvarle la vida.»',
-      test3_pet:   'Papá de Mango 🐈',
-
       // Contact
       contact_label: 'Contacto & Ubicación',
       contact_h2:    'Visítanos en<br><em>Tijuana.</em>',
@@ -203,14 +194,6 @@
       dogs_sub:    'All breeds welcome',
       cats_label:  'Cats',
       cats_sub:    'Feline specialists',
-
-      test_label:  'Testimonials',
-      test_h2:     'What our<br>clients say.',
-      test1_text:  '«Best vet in Tijuana. They treated my dog Luna with so much care and professionalism. 100% recommended.»',
-      test1_pet:   "Luna's mom 🐕",
-      test2_text:  '«I drive from San Diego specifically for VetTJ. Their bilingual staff makes everything so easy, and my cats Mochi and Biscuit are in the best hands.»',
-      test3_text:  '«I brought my cat Mango in for an emergency at 11pm and the doctors were there. Thank you for saving his life.»',
-      test3_pet:   "Mango's dad 🐈",
 
       contact_label: 'Contact & Location',
       contact_h2:    'Come visit us in<br><em>Tijuana.</em>',
@@ -396,15 +379,6 @@
     ['#hoursClosed',      'textContent', 'hours_closed'],
     ['#hoursNote',        'textContent', 'hours_note'],
 
-    // Testimonials
-    ['.testimonials .label', 'textContent', 'test_label'],
-    ['.testimonials h2',     'innerHTML',   'test_h2'],
-    ['#test1Text',  'textContent', 'test1_text'],
-    ['#test1Pet',   'textContent', 'test1_pet'],
-    ['#test2Text',  'textContent', 'test2_text'],
-    ['#test3Text',  'textContent', 'test3_text'],
-    ['#test3Pet',   'textContent', 'test3_pet'],
-
     // Contact
     ['.contact .label',      'textContent', 'contact_label'],
     ['.contact__info h2',    'innerHTML',   'contact_h2'],
@@ -556,20 +530,6 @@
     const hoursNote = document.querySelector('.hours__note');
     if (hoursNote) hoursNote.id = 'hoursNote';
 
-    // Testimonials
-    const testCards = document.querySelectorAll('.testimonial-card');
-    if (testCards[0]) {
-      const p = testCards[0].querySelector('p'); if (p) p.id = 'test1Text';
-      const pet = testCards[0].querySelector('.testimonial-card__pet'); if (pet) pet.id = 'test1Pet';
-    }
-    if (testCards[1]) {
-      const p = testCards[1].querySelector('p'); if (p) p.id = 'test2Text';
-    }
-    if (testCards[2]) {
-      const p = testCards[2].querySelector('p'); if (p) p.id = 'test3Text';
-      const pet = testCards[2].querySelector('.testimonial-card__pet'); if (pet) pet.id = 'test3Pet';
-    }
-
     // Contact
     const contactStrongs = document.querySelectorAll('.contact__item strong');
     if (contactStrongs[0]) contactStrongs[0].id = 'contactAddr';
@@ -621,13 +581,11 @@
       });
     });
 
-    // Family gallery: fall back to placedog.net (always returns a pet photo)
-    document.querySelectorAll('.family-card img').forEach(function (img, i) {
+    // Family review photos: fall back to placedog.net if an image fails
+    document.querySelectorAll('.family-card__media img').forEach(function (img, i) {
       img.addEventListener('error', function handle() {
         img.removeEventListener('error', handle);
-        const seed = img.dataset.fallbackSeed || ('pet' + i);
-        img.src = 'https://placedog.net/640/640?id=' + ((i * 13) % 200 + 1);
-        img.dataset.fellBack = seed;
+        img.src = 'https://placedog.net/700/560?id=' + ((i * 17) % 200 + 1);
       });
     });
   }
@@ -635,7 +593,7 @@
   // ---- Stagger scroll-reveal within grids ----
   function applyStagger() {
     const groups = document.querySelectorAll(
-      '.services__grid, .testimonials__grid, .philosophy__grid, .team__grid, .family__grid'
+      '.services__grid, .philosophy__grid, .team__grid, .family__grid'
     );
     groups.forEach(function (grid) {
       Array.from(grid.children).forEach(function (child, i) {
@@ -688,7 +646,7 @@
 
     // Scroll reveal (Intersection Observer)
     const revealEls = document.querySelectorAll(
-      '.service-card, .testimonial-card, .about__text, .about__gallery, .philosophy-card, .team-card, .family-card, .hours__inner > *, .contact__info, .contact__form-wrap'
+      '.service-card, .about__text, .about__gallery, .philosophy-card, .team-card, .family-card, .hours__inner > *, .contact__info, .contact__form-wrap'
     );
 
     const observer = new IntersectionObserver(function (entries) {
@@ -703,6 +661,127 @@
     revealEls.forEach(function (el) {
       el.classList.add('reveal-on-scroll');
       observer.observe(el);
+    });
+
+    // ---- Heading underline draw on scroll-in ----
+    const headers = document.querySelectorAll(
+      '.services__header, .philosophy__header, .team__header, .family__header'
+    );
+    const hdrObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('drawn');
+          hdrObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    headers.forEach(function (h) { hdrObs.observe(h); });
+
+    // ---- Animated stat counters ----
+    const statNums = document.querySelectorAll('.about__stat-num');
+    const countObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const raw = el.textContent.trim();
+        const m = raw.match(/^([^\d]*)(\d+)(K?)([^\d]*)$/);
+        if (!m) { countObs.unobserve(el); return; }
+        const prefix = m[1], target = parseInt(m[2], 10), suffix = m[3] + m[4];
+        const duration = 1400;
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const val = Math.round(target * eased);
+          el.textContent = prefix + val + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    statNums.forEach(function (el) { countObs.observe(el); });
+
+    // ---- Tilt effect on family review cards ----
+    document.querySelectorAll('.family-card').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width  - 0.5;
+        const py = (e.clientY - r.top)  / r.height - 0.5;
+        card.style.transform =
+          'translateY(-6px) rotateX(' + (-py * 4) + 'deg) rotateY(' + (px * 6) + 'deg)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = '';
+      });
+    });
+
+    // ---- Parallax on hero floating frames ----
+    const floats = document.querySelectorAll('.hero__float');
+    const hero   = document.querySelector('.hero');
+    if (hero && floats.length) {
+      hero.addEventListener('mousemove', function (e) {
+        const r = hero.getBoundingClientRect();
+        const cx = (e.clientX - r.left) / r.width  - 0.5;
+        const cy = (e.clientY - r.top)  / r.height - 0.5;
+        floats.forEach(function (f, i) {
+          const depth = (i + 1) * 10;
+          f.style.setProperty('--px', (cx * depth) + 'px');
+          f.style.setProperty('--py', (cy * depth) + 'px');
+        });
+      });
+      hero.addEventListener('mouseleave', function () {
+        floats.forEach(function (f) {
+          f.style.setProperty('--px', '0px');
+          f.style.setProperty('--py', '0px');
+        });
+      });
+    }
+
+    // ---- Scroll progress bar + hide-nav-on-scroll-down ----
+    const progress = document.createElement('div');
+    progress.className = 'scroll-progress';
+    document.body.appendChild(progress);
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progress.style.width = pct + '%';
+
+      const y = window.scrollY;
+      if (y > 140 && y > lastY) {
+        nav.classList.add('nav--hidden');
+      } else {
+        nav.classList.remove('nav--hidden');
+      }
+      lastY = y;
+    }, { passive: true });
+
+    // ---- Magnetic CTA buttons ----
+    document.querySelectorAll('.btn--primary, .btn--ghost').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        const r = btn.getBoundingClientRect();
+        const mx = e.clientX - r.left - r.width  / 2;
+        const my = e.clientY - r.top  - r.height / 2;
+        btn.style.transform = 'translate(' + (mx * 0.18) + 'px, ' + (my * 0.25) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () {
+        btn.style.transform = '';
+      });
+    });
+
+    // ---- Click ripple effect on CTA buttons ----
+    document.querySelectorAll('.btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        const r = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'btn__ripple';
+        ripple.style.left = (e.clientX - r.left) + 'px';
+        ripple.style.top  = (e.clientY - r.top)  + 'px';
+        btn.appendChild(ripple);
+        setTimeout(function () { ripple.remove(); }, 650);
+      });
     });
   });
 
