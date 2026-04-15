@@ -7,7 +7,11 @@
 
   // ---- Language System ----
 
-  let currentLang = localStorage.getItem('vettj-lang') || 'es';
+  const SUPPORTED_LANGS = ['es', 'en'];
+  function normalizeLang(raw) {
+    return SUPPORTED_LANGS.indexOf(raw) !== -1 ? raw : 'es';
+  }
+  let currentLang = normalizeLang(localStorage.getItem('vettj-lang'));
 
   const translations = {
     es: {
@@ -130,10 +134,10 @@
       team1_bio:  '15 años cuidando mascotas en Tijuana. Especialista en medicina felina y geriátrica.',
       team2_role: 'Cirujano Veterinario',
       team2_bio:  'Formado en UNAM y UC Davis. Lidera nuestro quirófano con técnicas mínimamente invasivas.',
-      team3_role: 'Dermatología & Nutrición',
-      team3_bio:  'Alergias, piel y planes nutricionales personalizados para perros y gatos de todas las edades.',
-      team4_role: 'Urgencias & Cuidado Crítico',
-      team4_bio:  'Bilingüe, originario de San Diego. A cargo de nuestra línea de urgencias 24h.',
+      team3_role: 'Urgencias & Cuidado Crítico',
+      team3_bio:  'Bilingüe, originario de San Diego. A cargo de nuestra línea de urgencias 24h.',
+      team4_role: 'Dermatología & Nutrición',
+      team4_bio:  'Alergias, piel y planes nutricionales personalizados para perros y gatos de todas las edades.',
 
       // Family gallery
       fam_label:  'Nuestra Familia',
@@ -260,10 +264,10 @@
       team1_bio:  'With 15 years caring for pets in Tijuana. Specialist in feline and geriatric medicine.',
       team2_role: 'Veterinary Surgeon',
       team2_bio:  'Trained at UNAM and UC Davis. Leads our surgery suite with minimally invasive techniques.',
-      team3_role: 'Dermatology & Nutrition',
-      team3_bio:  'Allergies, skin care and personalized nutrition plans for dogs and cats of all ages.',
-      team4_role: 'Emergency & Critical Care',
-      team4_bio:  'Bilingual, San Diego native. In charge of our 24h emergency line.',
+      team3_role: 'Emergency & Critical Care',
+      team3_bio:  'Bilingual, San Diego native. In charge of our 24h emergency line.',
+      team4_role: 'Dermatology & Nutrition',
+      team4_bio:  'Allergies, skin care and personalized nutrition plans for dogs and cats of all ages.',
 
       // Family gallery
       fam_label:  'Our Family',
@@ -412,7 +416,9 @@
   ];
 
   function applyLanguage(lang) {
+    lang = normalizeLang(lang);
     const t = translations[lang];
+    if (!t) return; // defensive: unknown language shouldn't brick the page
     document.documentElement.lang = lang;
 
     domMap.forEach(([sel, prop, key]) => {
@@ -602,31 +608,41 @@
     });
   }
 
+  // Helper — run a step in isolation so one bug can't kill the whole init
+  function safe(label, fn) {
+    try { fn(); }
+    catch (err) { console.error('[VetTJ] step failed:', label, err); }
+  }
+
   // ---- Init ----
   document.addEventListener('DOMContentLoaded', function () {
-    addIds();
-    applyLanguage(currentLang);
-    installImageFallbacks();
-    applyStagger();
+    safe('addIds',               addIds);
+    safe('applyLanguage',        function () { applyLanguage(currentLang); });
+    safe('installImageFallbacks', installImageFallbacks);
+    safe('applyStagger',         applyStagger);
 
-    // Language toggle button
+    // Language toggle button — bound before anything else that might fail
     const toggle = document.getElementById('langToggle');
-    toggle.addEventListener('click', function () {
-      currentLang = currentLang === 'es' ? 'en' : 'es';
-      applyLanguage(currentLang);
-    });
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        currentLang = (currentLang === 'es') ? 'en' : 'es';
+        applyLanguage(currentLang);
+      });
+    }
 
     // Nav scroll effect
     const nav = document.querySelector('.nav');
-    window.addEventListener('scroll', function () {
-      nav.style.boxShadow = window.scrollY > 40
-        ? '0 2px 24px rgba(0,0,0,0.12)'
-        : 'none';
-    });
+    if (nav) {
+      window.addEventListener('scroll', function () {
+        nav.style.boxShadow = window.scrollY > 40
+          ? '0 2px 24px rgba(0,0,0,0.12)'
+          : 'none';
+      });
+    }
 
     // WhatsApp form submission
     const form = document.getElementById('contactForm');
-    form.addEventListener('submit', function (e) {
+    if (form) form.addEventListener('submit', function (e) {
       e.preventDefault();
       const inputs  = form.querySelectorAll('input, select, textarea');
       const name    = inputs[0].value.trim();
@@ -663,10 +679,45 @@
       observer.observe(el);
     });
 
-    // ---- Heading underline draw on scroll-in ----
+    // ---- Heading underline draw + word-reveal on scroll-in ----
     const headers = document.querySelectorAll(
       '.services__header, .philosophy__header, .team__header, .family__header'
     );
+
+    // Wrap each word in an .anim-word span so we can stagger them in.
+    // Callable: runs initially and after every language switch.
+    function splitHeadingWords() {
+      headers.forEach(function (hdr) {
+        const h2 = hdr.querySelector('h2');
+        if (!h2) return;
+        // If already split and the text content matches, skip
+        const html = h2.innerHTML;
+        if (html.indexOf('anim-word') !== -1) return;
+        // Split on <br> first to preserve intended line breaks
+        const lines = html.split(/<br\s*\/?>/i);
+        const out = lines.map(function (line) {
+          return line.replace(/(<[^>]+>|[^\s<]+)/g, function (match) {
+            if (match.charAt(0) === '<') return match;
+            return '<span class="anim-word">' + match + '</span>';
+          });
+        }).join('<br>');
+        h2.innerHTML = out;
+        h2.querySelectorAll('.anim-word').forEach(function (w, i) {
+          w.style.setProperty('--word-index', i);
+        });
+      });
+    }
+    splitHeadingWords();
+
+    // After each language change, re-split (applyLanguage rewrites the h2)
+    const originalApply = applyLanguage;
+    applyLanguage = function (lang) {
+      originalApply(lang);
+      splitHeadingWords();
+      // Headings that were already drawn stay drawn; new words will animate
+      // in respecting their delay chain.
+    };
+
     const hdrObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -674,8 +725,42 @@
           hdrObs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.3 });
     headers.forEach(function (h) { hdrObs.observe(h); });
+
+    // ---- Pets band + marquee reveal ----
+    const bandEls = document.querySelectorAll('.pets-band, .marquee');
+    const bandObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          bandObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    bandEls.forEach(function (b) { bandObs.observe(b); });
+
+    // ---- Parallax scroll (hero bg text + about gallery) ----
+    const aboutSection = document.querySelector('.about');
+    let rafPending = false;
+    function onScrollParallax() {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(function () {
+        const y = window.scrollY;
+        document.documentElement.style.setProperty('--scroll-y', y + 'px');
+        if (aboutSection) {
+          const r = aboutSection.getBoundingClientRect();
+          // Distance from viewport center, clamped
+          const center = window.innerHeight / 2;
+          const offset = Math.max(-400, Math.min(400, r.top + r.height / 2 - center));
+          document.documentElement.style.setProperty('--about-scroll', offset + 'px');
+        }
+        rafPending = false;
+      });
+    }
+    window.addEventListener('scroll', onScrollParallax, { passive: true });
+    onScrollParallax(); // run once so parallax is set on load
 
     // ---- Animated stat counters ----
     const statNums = document.querySelectorAll('.about__stat-num');
@@ -749,13 +834,12 @@
       const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
       progress.style.width = pct + '%';
 
-      const y = window.scrollY;
-      if (y > 140 && y > lastY) {
-        nav.classList.add('nav--hidden');
-      } else {
-        nav.classList.remove('nav--hidden');
+      if (nav) {
+        const y = window.scrollY;
+        if (y > 140 && y > lastY) nav.classList.add('nav--hidden');
+        else                      nav.classList.remove('nav--hidden');
+        lastY = y;
       }
-      lastY = y;
     }, { passive: true });
 
     // ---- Magnetic CTA buttons ----
