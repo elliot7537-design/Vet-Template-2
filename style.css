@@ -1411,16 +1411,14 @@ body:not(.lang-en) .lang-toggle__label:first-child { color: #fff; }
 /* ---- Star rating pop (family cards only) ---- */
 /* stars animation defined alongside family section */
 
-/* ---- About gallery item: soft hover lift ---- */
+/* ---- About gallery item: shadow lift on hover (transform is reserved for parallax) ---- */
 .about__gallery-item {
-  transition: transform 0.45s cubic-bezier(0.22,0.61,0.36,1), box-shadow 0.45s;
+  transition: box-shadow 0.45s, filter 0.45s;
 }
 .about__gallery-item:hover {
-  transform: translateY(-4px) rotate(-0.3deg);
   box-shadow: 0 18px 36px rgba(0,0,0,0.12);
+  filter: brightness(1.04);
 }
-.about__gallery-item:nth-child(2):hover { transform: translateY(-4px) rotate(0.4deg); }
-.about__gallery-item:nth-child(3):hover { transform: translateY(-4px) rotate(-0.6deg); }
 
 /* ---- Pets band images: subtle wobble on hover group ---- */
 @keyframes wobble {
@@ -1445,6 +1443,135 @@ body:not(.lang-en) .lang-toggle__label:first-child { color: #fff; }
 .lang-toggle__pill {
   animation: pill-flash 0.5s ease-out;
 }
+
+/* ============================================
+   SCROLL-TRIGGERED ANIMATIONS
+   ============================================ */
+
+/* Parallax — JS writes --scroll-y (page) and --about-scroll (section) */
+.hero__bg-text {
+  will-change: transform;
+  transform: translate(-50%, calc(-48% + var(--scroll-y, 0px) * 0.35));
+}
+.about__gallery-item {
+  will-change: transform;
+}
+.about__gallery-item:nth-child(1) { transform: translateY(calc(var(--about-scroll, 0px) * -0.08)); }
+.about__gallery-item:nth-child(2) { transform: translateY(calc(var(--about-scroll, 0px) *  0.06)); }
+.about__gallery-item:nth-child(3) { transform: translateY(calc(var(--about-scroll, 0px) * -0.12)); }
+
+/* Alternating slide-in for service + philosophy cards */
+.service-card.reveal-on-scroll,
+.philosophy-card.reveal-on-scroll {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition:
+    opacity  0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.service-card:nth-child(even).reveal-on-scroll,
+.philosophy-card:nth-child(even).reveal-on-scroll {
+  transform: translateX(40px);
+}
+.service-card.reveal-on-scroll.revealed,
+.philosophy-card.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Team cards — rise + slight rotate on reveal */
+.team-card.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px) rotate(-1.2deg);
+  transition:
+    opacity  0.75s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.team-card:nth-child(even).reveal-on-scroll {
+  transform: translateY(40px) rotate(1.2deg);
+}
+.team-card.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
+/* Family review cards — pop up and scale */
+.family-card.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(60px) scale(0.94);
+  transition:
+    opacity  0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.family-card.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Word-by-word heading reveal */
+.anim-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity  0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: calc(var(--word-index, 0) * 70ms);
+}
+.drawn .anim-word {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pets band — thumbs pop into place when the band scrolls in */
+.pets-band__img-group img { opacity: 0; transform: scale(0.6); }
+.pets-band.revealed .pets-band__img-group img {
+  animation: thumb-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.pets-band.revealed .pets-band__col--dogs .pets-band__img-group img:nth-child(1) { animation-delay: 0.10s; }
+.pets-band.revealed .pets-band__col--dogs .pets-band__img-group img:nth-child(2) { animation-delay: 0.22s; }
+.pets-band.revealed .pets-band__col--cats .pets-band__img-group img:nth-child(1) { animation-delay: 0.34s; }
+.pets-band.revealed .pets-band__col--cats .pets-band__img-group img:nth-child(2) { animation-delay: 0.46s; }
+@keyframes thumb-pop {
+  0%   { opacity: 0; transform: scale(0.5) rotate(-12deg); }
+  60%  { opacity: 1; transform: scale(1.08) rotate(4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+/* Ken-burns on the featured service card image */
+.service-card--featured .service-card__img { overflow: hidden; }
+.service-card--featured .service-card__img img {
+  animation: ken-burns 14s ease-in-out infinite alternate;
+}
+@keyframes ken-burns {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.08) translate(-2%, -3%); }
+}
+
+/* Contact section slides in from opposite sides */
+.contact__info.reveal-on-scroll {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.75s cubic-bezier(0.22,0.61,0.36,1),
+              transform 0.75s cubic-bezier(0.22,0.61,0.36,1);
+}
+.contact__form-wrap.reveal-on-scroll {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.75s cubic-bezier(0.22,0.61,0.36,1),
+              transform 0.75s cubic-bezier(0.22,0.61,0.36,1);
+}
+.contact__info.reveal-on-scroll.revealed,
+.contact__form-wrap.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Marquee speeds up while it's on screen */
+.marquee.revealed .marquee__track { animation-duration: 16s; }
 
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
