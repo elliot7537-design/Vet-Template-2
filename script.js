@@ -7,7 +7,11 @@
 
   // ---- Language System ----
 
-  let currentLang = localStorage.getItem('vettj-lang') || 'es';
+  const SUPPORTED_LANGS = ['es', 'en'];
+  function normalizeLang(raw) {
+    return SUPPORTED_LANGS.indexOf(raw) !== -1 ? raw : 'es';
+  }
+  let currentLang = normalizeLang(localStorage.getItem('vettj-lang'));
 
   const translations = {
     es: {
@@ -412,7 +416,9 @@
   ];
 
   function applyLanguage(lang) {
+    lang = normalizeLang(lang);
     const t = translations[lang];
+    if (!t) return; // defensive: unknown language shouldn't brick the page
     document.documentElement.lang = lang;
 
     domMap.forEach(([sel, prop, key]) => {
@@ -602,31 +608,41 @@
     });
   }
 
+  // Helper — run a step in isolation so one bug can't kill the whole init
+  function safe(label, fn) {
+    try { fn(); }
+    catch (err) { console.error('[VetTJ] step failed:', label, err); }
+  }
+
   // ---- Init ----
   document.addEventListener('DOMContentLoaded', function () {
-    addIds();
-    applyLanguage(currentLang);
-    installImageFallbacks();
-    applyStagger();
+    safe('addIds',               addIds);
+    safe('applyLanguage',        function () { applyLanguage(currentLang); });
+    safe('installImageFallbacks', installImageFallbacks);
+    safe('applyStagger',         applyStagger);
 
-    // Language toggle button
+    // Language toggle button — bound before anything else that might fail
     const toggle = document.getElementById('langToggle');
-    toggle.addEventListener('click', function () {
-      currentLang = currentLang === 'es' ? 'en' : 'es';
-      applyLanguage(currentLang);
-    });
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        currentLang = (currentLang === 'es') ? 'en' : 'es';
+        applyLanguage(currentLang);
+      });
+    }
 
     // Nav scroll effect
     const nav = document.querySelector('.nav');
-    window.addEventListener('scroll', function () {
-      nav.style.boxShadow = window.scrollY > 40
-        ? '0 2px 24px rgba(0,0,0,0.12)'
-        : 'none';
-    });
+    if (nav) {
+      window.addEventListener('scroll', function () {
+        nav.style.boxShadow = window.scrollY > 40
+          ? '0 2px 24px rgba(0,0,0,0.12)'
+          : 'none';
+      });
+    }
 
     // WhatsApp form submission
     const form = document.getElementById('contactForm');
-    form.addEventListener('submit', function (e) {
+    if (form) form.addEventListener('submit', function (e) {
       e.preventDefault();
       const inputs  = form.querySelectorAll('input, select, textarea');
       const name    = inputs[0].value.trim();
@@ -749,13 +765,12 @@
       const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
       progress.style.width = pct + '%';
 
-      const y = window.scrollY;
-      if (y > 140 && y > lastY) {
-        nav.classList.add('nav--hidden');
-      } else {
-        nav.classList.remove('nav--hidden');
+      if (nav) {
+        const y = window.scrollY;
+        if (y > 140 && y > lastY) nav.classList.add('nav--hidden');
+        else                      nav.classList.remove('nav--hidden');
+        lastY = y;
       }
-      lastY = y;
     }, { passive: true });
 
     // ---- Magnetic CTA buttons ----
