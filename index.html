@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VetTJ — Clínica Veterinaria Tijuana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__logo">VetTJ</div>
+    <div class="nav__center">
+      <a href="#servicios" class="nav__link" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="#nosotros" class="nav__link" data-es="Nosotros" data-en="About">Nosotros</a>
+      <a href="#horarios" class="nav__link" data-es="Horarios" data-en="Hours">Horarios</a>
+      <a href="#contacto" class="nav__link" data-es="Contacto" data-en="Contact">Contacto</a>
+    </div>
+    <div class="nav__right">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="lang-toggle__label">ES</span>
+        <span class="lang-toggle__divider">/</span>
+        <span class="lang-toggle__label">EN</span>
+        <span class="lang-toggle__pill" id="langPill"></span>
+      </button>
+      <a href="#contacto" class="btn btn--nav" data-es="Cita" data-en="Book">Cita</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero__bg-text" aria-hidden="true">TJ</div>
+
+    <div class="hero__float hero__float--cat">
+      <div class="hero__frame hero__frame--circle">
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80" alt="Gato / Cat" />
+      </div>
+    </div>
+
+    <div class="hero__float hero__float--dog">
+      <div class="hero__frame hero__frame--rect">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80" alt="Perro / Dog" />
+      </div>
+    </div>
+
+    <div class="hero__float hero__float--paw hero__float--paw1">
+      <div class="hero__frame hero__frame--small">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=300&q=80" alt="Perro feliz / Happy dog" />
+      </div>
+    </div>
+
+    <div class="hero__content">
+      <div class="hero__tag" data-es="Clínica Veterinaria · Tijuana, B.C." data-en="Veterinary Clinic · Tijuana, B.C.">Clínica Veterinaria · Tijuana, B.C.</div>
+      <h1 class="hero__headline">
+        <span class="hero__line" data-es="LA SALUD" data-en="HEALTH">LA SALUD</span>
+        <span class="hero__line hero__line--italic" data-es="que tu" data-en="your pet">que tu</span>
+        <span class="hero__line" data-es="MASCOTA" data-en="DESERVES">MASCOTA</span>
+        <span class="hero__line hero__line--outline" data-es="MERECE." data-en="THE MOST.">MERECE.</span>
+      </h1>
+      <div class="hero__sub" data-es="Desde 2008 · Perros &amp; Gatos · Español &amp; English" data-en="Since 2008 · Dogs &amp; Cats · Español &amp; English">
+        Desde 2008 · Perros &amp; Gatos · Español &amp; English
+      </div>
+    </div>
+
+    <div class="hero__cta">
+      <a href="tel:+526641234567" class="btn btn--primary" data-es="Llamar Ahora" data-en="Call Now">Llamar Ahora</a>
+      <a href="#servicios" class="btn btn--ghost" data-es="Ver Servicios" data-en="Our Services">Ver Servicios</a>
+    </div>
+
+    <div class="hero__badge">
+      <div class="hero__badge-inner">
+        <span data-es="DESDE" data-en="SINCE">DESDE</span>
+        <strong>2008</strong>
+        <span data-es="TIJUANA" data-en="TIJUANA">TIJUANA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Perros &amp; Gatos</span><span class="marquee__dot">✦</span>
+      <span>Dogs &amp; Cats</span><span class="marquee__dot">✦</span>
+      <span>Tijuana, B.C.</span><span class="marquee__dot">✦</span>
+      <span>Medicina General</span><span class="marquee__dot">✦</span>
+      <span>Vacunación</span><span class="marquee__dot">✦</span>
+      <span>Cirugía</span><span class="marquee__dot">✦</span>
+      <span>Emergency Care</span><span class="marquee__dot">✦</span>
+      <span>Grooming</span><span class="marquee__dot">✦</span>
+      <span>Perros &amp; Gatos</span><span class="marquee__dot">✦</span>
+      <span>Dogs &amp; Cats</span><span class="marquee__dot">✦</span>
+      <span>Tijuana, B.C.</span><span class="marquee__dot">✦</span>
+      <span>Medicina General</span><span class="marquee__dot">✦</span>
+      <span>Vacunación</span><span class="marquee__dot">✦</span>
+      <span>Cirugía</span><span class="marquee__dot">✦</span>
+      <span>Emergency Care</span><span class="marquee__dot">✦</span>
+      <span>Grooming</span><span class="marquee__dot">✦</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="servicios">
+    <div class="services__header">
+      <span class="label" data-es="Nuestros Servicios" data-en="Our Services">Nuestros Servicios</span>
+      <h2 data-es="Todo lo que tu<br>mascota necesita." data-en="Everything your<br>pet needs.">Todo lo que tu<br>mascota necesita.</h2>
+    </div>
+
+    <div class="services__grid">
+      <div class="service-card service-card--featured">
+        <div class="service-card__icon">🩺</div>
+        <h3 data-es="Medicina General" data-en="General Medicine">Medicina General</h3>
+        <p data-es="Consultas de rutina, diagnóstico y tratamiento para perros y gatos de todas las edades." data-en="Routine check-ups, diagnosis, and treatment for dogs and cats of all ages.">Consultas de rutina, diagnóstico y tratamiento para perros y gatos de todas las edades.</p>
+        <div class="service-card__img">
+          <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400&q=80" alt="Veterinarian examining a dog" />
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">💉</div>
+        <h3 data-es="Vacunación" data-en="Vaccination">Vacunación</h3>
+        <p data-es="Esquemas completos para perros y gatos. Protege a tu mascota con las vacunas esenciales." data-en="Complete vaccination schedules for dogs and cats. Keep your pet protected.">Esquemas completos para perros y gatos. Protege a tu mascota con las vacunas esenciales.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">🔬</div>
+        <h3 data-es="Laboratorio" data-en="Laboratory">Laboratorio</h3>
+        <p data-es="Análisis de sangre, orina y más. Resultados rápidos para un diagnóstico preciso." data-en="Blood work, urinalysis and more. Fast results for precise diagnosis.">Análisis de sangre, orina y más. Resultados rápidos para un diagnóstico preciso.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">✂️</div>
+        <h3 data-es="Cirugía" data-en="Surgery">Cirugía</h3>
+        <p data-es="Esterilizaciones, castraciones y procedimientos quirúrgicos con equipo moderno." data-en="Spay &amp; neuter and surgical procedures with modern equipment.">Esterilizaciones, castraciones y procedimientos quirúrgicos con equipo moderno.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">🛁</div>
+        <h3 data-es="Estética &amp; Grooming" data-en="Grooming &amp; Spa">Estética &amp; Grooming</h3>
+        <p data-es="Baño, corte de pelo y uñas para que tu mascota siempre luzca increíble." data-en="Bath, haircut, and nail trim so your pet always looks amazing.">Baño, corte de pelo y uñas para que tu mascota siempre luzca increíble.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">🚨</div>
+        <h3 data-es="Urgencias" data-en="Emergency">Urgencias</h3>
+        <p data-es="Atención de emergencias veterinarias. Llámanos, estamos para ayudarte cuando más lo necesitas." data-en="Emergency veterinary care. Call us, we're here when you need us most.">Atención de emergencias veterinarias. Llámanos, estamos para ayudarte cuando más lo necesitas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="about__visual">
+      <div class="about__img-wrap">
+        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=600&q=80" alt="Veterinarian with cat" class="about__img about__img--main" />
+        <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=300&q=80" alt="Happy dog" class="about__img about__img--accent" />
+      </div>
+      <div class="about__stat-block">
+        <div class="about__stat">
+          <span class="about__stat-num">+15</span>
+          <span class="about__stat-label" data-es="Años de experiencia" data-en="Years of experience">Años de experiencia</span>
+        </div>
+        <div class="about__stat">
+          <span class="about__stat-num">+8K</span>
+          <span class="about__stat-label" data-es="Pacientes atendidos" data-en="Patients treated">Pacientes atendidos</span>
+        </div>
+        <div class="about__stat">
+          <span class="about__stat-num">4</span>
+          <span class="about__stat-label" data-es="Veterinarios certificados" data-en="Certified vets">Veterinarios certificados</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about__text">
+      <span class="label" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</span>
+      <h2 data-es="Cuidamos a tu<br><em>familia</em> entera." data-en="We care for your<br><em>whole</em> family.">Cuidamos a tu<br><em>familia</em> entera.</h2>
+      <p data-es="En VetTJ entendemos que tus mascotas son parte de tu familia. Ubicados en el corazón de Tijuana, atendemos a la comunidad fronteriza con calidez, profesionalismo y amor por los animales — tanto en español como en inglés." data-en="At VetTJ we understand your pets are part of your family. Located in the heart of Tijuana, we serve the border community with warmth, professionalism, and a love for animals — in both Spanish and English.">
+        En VetTJ entendemos que tus mascotas son parte de tu familia. Ubicados en el corazón de Tijuana, atendemos a la comunidad fronteriza con calidez, profesionalismo y amor por los animales — tanto en español como en inglés.
+      </p>
+      <p data-es="Nuestro equipo de veterinarios certificados está listo para brindar la mejor atención médica a perros y gatos, utilizando tecnología moderna y un trato humano." data-en="Our team of certified veterinarians is ready to provide the best medical care for dogs and cats, using modern technology and a compassionate approach.">
+        Nuestro equipo de veterinarios certificados está listo para brindar la mejor atención médica a perros y gatos, utilizando tecnología moderna y un trato humano.
+      </p>
+      <div class="about__flags">
+        <span class="flag-badge" data-es="🇲🇽 Atención en Español" data-en="🇲🇽 Spanish Available">🇲🇽 Atención en Español</span>
+        <span class="flag-badge" data-es="🇺🇸 English Spoken Here" data-en="🇺🇸 English Spoken Here">🇺🇸 English Spoken Here</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PETS BAND -->
+  <section class="pets-band">
+    <div class="pets-band__col pets-band__col--dogs">
+      <div class="pets-band__img-group">
+        <img src="https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?w=400&q=80" alt="Dog" />
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&q=80" alt="Dog 2" />
+      </div>
+      <div class="pets-band__label">
+        <h3 data-es="Perros" data-en="Dogs">Perros</h3>
+        <p data-es="Todas las razas bienvenidas" data-en="All breeds welcome">Todas las razas bienvenidas</p>
+      </div>
+    </div>
+    <div class="pets-band__divider">
+      <span data-es="&amp;" data-en="&amp;">&amp;</span>
+    </div>
+    <div class="pets-band__col pets-band__col--cats">
+      <div class="pets-band__label">
+        <h3 data-es="Gatos" data-en="Cats">Gatos</h3>
+        <p data-es="Especialistas en felinos" data-en="Feline specialists">Especialistas en felinos</p>
+      </div>
+      <div class="pets-band__img-group">
+        <img src="https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?w=400&q=80" alt="Cat" />
+        <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&q=80" alt="Cat 2" />
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section class="hours" id="horarios">
+    <div class="hours__inner">
+      <div class="hours__text">
+        <span class="label" data-es="Horarios" data-en="Hours">Horarios</span>
+        <h2 data-es="Abiertos cuando<br>nos necesitas." data-en="Open when<br>you need us.">Abiertos cuando<br>nos necesitas.</h2>
+        <p data-es="Atendemos de lunes a sábado. Para emergencias fuera de horario llama a nuestra línea de urgencias." data-en="Open Monday through Saturday. For after-hours emergencies, call our emergency line.">
+          Atendemos de lunes a sábado. Para emergencias fuera de horario llama a nuestra línea de urgencias.
+        </p>
+        <a href="tel:+526641234567" class="btn btn--primary" data-es="📞 Emergencias 24h" data-en="📞 24h Emergencies">📞 Emergencias 24h</a>
+      </div>
+      <div class="hours__table">
+        <div class="hours__row">
+          <span data-es="Lunes — Viernes" data-en="Monday — Friday">Lunes — Viernes</span>
+          <span>8:00 AM – 8:00 PM</span>
+        </div>
+        <div class="hours__row">
+          <span data-es="Sábado" data-en="Saturday">Sábado</span>
+          <span>9:00 AM – 6:00 PM</span>
+        </div>
+        <div class="hours__row hours__row--closed">
+          <span data-es="Domingo" data-en="Sunday">Domingo</span>
+          <span data-es="Solo Urgencias" data-en="Emergencies Only">Solo Urgencias</span>
+        </div>
+        <div class="hours__note" data-es="* Urgencias disponibles las 24 horas, los 7 días de la semana." data-en="* Emergency care available 24 hours, 7 days a week.">
+          * Urgencias disponibles las 24 horas, los 7 días de la semana.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <span class="label" data-es="Testimonios" data-en="Testimonials">Testimonios</span>
+    <h2 data-es="Lo que dicen<br>nuestros clientes." data-en="What our<br>clients say.">Lo que dicen<br>nuestros clientes.</h2>
+    <div class="testimonials__grid">
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p data-es="&ldquo;El mejor veterinario en Tijuana. Atendieron a mi perro Luna con mucho cuidado y profesionalismo. Los recomiendo al 100%.&rdquo;" data-en="&ldquo;Best vet in Tijuana. They treated my dog Luna with so much care and professionalism. 100% recommended.&rdquo;">
+          &ldquo;El mejor veterinario en Tijuana. Atendieron a mi perro Luna con mucho cuidado y profesionalismo. Los recomiendo al 100%.&rdquo;
+        </p>
+        <div class="testimonial-card__author">
+          <span class="testimonial-card__name">María G.</span>
+          <span class="testimonial-card__pet" data-es="Mamá de Luna 🐕" data-en="Luna's mom 🐕">Mamá de Luna 🐕</span>
+        </div>
+      </div>
+      <div class="testimonial-card testimonial-card--accent">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p data-es="&ldquo;I drive from San Diego specifically for VetTJ. Their bilingual staff makes everything so easy, and my cats Mochi and Biscuit are in the best hands.&rdquo;" data-en="&ldquo;I drive from San Diego specifically for VetTJ. Their bilingual staff makes everything so easy, and my cats Mochi and Biscuit are in the best hands.&rdquo;">
+          &ldquo;I drive from San Diego specifically for VetTJ. Their bilingual staff makes everything so easy, and my cats Mochi and Biscuit are in the best hands.&rdquo;
+        </p>
+        <div class="testimonial-card__author">
+          <span class="testimonial-card__name">James R.</span>
+          <span class="testimonial-card__pet">Mochi &amp; Biscuit's dad 🐱</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p data-es="&ldquo;Llevé a mi gato Mango a una emergencia a las 11 de la noche y los doctores estuvieron ahí. Gracias por salvarle la vida.&rdquo;" data-en="&ldquo;I brought my cat Mango in for an emergency at 11pm and the doctors were there. Thank you for saving his life.&rdquo;">
+          &ldquo;Llevé a mi gato Mango a una emergencia a las 11 de la noche y los doctores estuvieron ahí. Gracias por salvarle la vida.&rdquo;
+        </p>
+        <div class="testimonial-card__author">
+          <span class="testimonial-card__name">Carlos M.</span>
+          <span class="testimonial-card__pet" data-es="Papá de Mango 🐈" data-en="Mango's dad 🐈">Papá de Mango 🐈</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contacto">
+    <div class="contact__inner">
+      <div class="contact__info">
+        <span class="label" data-es="Contacto &amp; Ubicación" data-en="Contact &amp; Location">Contacto &amp; Ubicación</span>
+        <h2 data-es="Visítanos en<br><em>Tijuana.</em>" data-en="Come visit us in<br><em>Tijuana.</em>">Visítanos en<br><em>Tijuana.</em></h2>
+
+        <div class="contact__details">
+          <div class="contact__item">
+            <span class="contact__icon">📍</span>
+            <div>
+              <strong data-es="Dirección" data-en="Address">Dirección</strong>
+              <span>Blvd. Agua Caliente 4500, Col. Aviación<br>Tijuana, Baja California, México</span>
+            </div>
+          </div>
+          <div class="contact__item">
+            <span class="contact__icon">📞</span>
+            <div>
+              <strong data-es="Teléfono" data-en="Phone">Teléfono</strong>
+              <a href="tel:+526641234567">+52 (664) 123-4567</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <span class="contact__icon">💬</span>
+            <div>
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/526641234567">+52 (664) 123-4567</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <span class="contact__icon">✉️</span>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:hola@vettj.mx">hola@vettj.mx</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact__border-note">
+          <span>🌉</span>
+          <p data-es="A solo 20 minutos del cruce fronterizo de San Ysidro. Atención en español e inglés." data-en="Just 20 minutes from the San Ysidro border crossing. Service in Spanish and English.">
+            A solo 20 minutos del cruce fronterizo de San Ysidro. Atención en español e inglés.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact__form-wrap">
+        <h3 data-es="Agenda tu cita" data-en="Book an Appointment">Agenda tu cita</h3>
+        <form class="contact__form" id="contactForm">
+          <div class="form-row">
+            <label data-es="Tu nombre" data-en="Your name">Tu nombre</label>
+            <input type="text" placeholder="Ana García / John Smith" required />
+          </div>
+          <div class="form-row">
+            <label data-es="Tu mascota" data-en="Your pet">Tu mascota</label>
+            <div class="form-row__pet">
+              <select>
+                <option value="perro" data-es="🐕 Perro / Dog" data-en="🐕 Dog / Perro">🐕 Perro / Dog</option>
+                <option value="gato" data-es="🐈 Gato / Cat" data-en="🐈 Cat / Gato">🐈 Gato / Cat</option>
+              </select>
+              <input type="text" id="petNameInput" placeholder="Nombre / Name" />
+            </div>
+          </div>
+          <div class="form-row">
+            <label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label>
+            <input type="tel" placeholder="+52 664 000 0000" />
+          </div>
+          <div class="form-row">
+            <label data-es="Motivo de la consulta" data-en="Reason for visit">Motivo de la consulta</label>
+            <textarea rows="3" id="consultaTextarea" placeholder="Ej: Vacuna anual / Annual vaccine..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full" data-es="Enviar por WhatsApp 💬" data-en="Send via WhatsApp 💬">Enviar por WhatsApp 💬</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="footer__logo">VetTJ</div>
+        <p data-es="Cuidamos a tus mascotas como si fueran las nuestras." data-en="We care for your pets as if they were our own.">Cuidamos a tus mascotas como si fueran las nuestras.</p>
+        <div class="footer__langs">
+          <span>🇲🇽 Español</span>
+          <span>🇺🇸 English</span>
+        </div>
+      </div>
+      <div class="footer__links">
+        <h4 data-es="Servicios" data-en="Services">Servicios</h4>
+        <a href="#servicios" data-es="Medicina General" data-en="General Medicine">Medicina General</a>
+        <a href="#servicios" data-es="Vacunación" data-en="Vaccination">Vacunación</a>
+        <a href="#servicios" data-es="Laboratorio" data-en="Laboratory">Laboratorio</a>
+        <a href="#servicios" data-es="Cirugía" data-en="Surgery">Cirugía</a>
+        <a href="#servicios" data-es="Grooming" data-en="Grooming">Grooming</a>
+        <a href="#servicios" data-es="Urgencias" data-en="Emergencies">Urgencias</a>
+      </div>
+      <div class="footer__links">
+        <h4 data-es="Clínica" data-en="Clinic">Clínica</h4>
+        <a href="#nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a>
+        <a href="#horarios" data-es="Horarios" data-en="Hours">Horarios</a>
+        <a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
+        <a href="#contacto" data-es="Agendar Cita" data-en="Book Appointment">Agendar Cita</a>
+      </div>
+      <div class="footer__contact-block">
+        <h4 data-es="Encuéntranos" data-en="Find Us">Encuéntranos</h4>
+        <p>Blvd. Agua Caliente 4500<br>Tijuana, B.C., México</p>
+        <a href="tel:+526641234567">+52 (664) 123-4567</a>
+        <a href="mailto:hola@vettj.mx">hola@vettj.mx</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span data-es="© 2024 VetTJ · Todos los derechos reservados" data-en="© 2024 VetTJ · All rights reserved">© 2024 VetTJ · Todos los derechos reservados</span>
+      <span data-es="Tijuana, Baja California, México" data-en="Tijuana, Baja California, Mexico">Tijuana, Baja California, México</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
