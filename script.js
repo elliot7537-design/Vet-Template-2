@@ -426,6 +426,20 @@
       if (el && t[key] !== undefined) el[prop] = t[key];
     });
 
+    // Any element with both data-es and data-en attributes auto-translates.
+    // This covers the review cards (quotes, author, pet info) without
+    // needing a new ID + key for each one.
+    const attr = 'data-' + lang;
+    document.querySelectorAll('[data-es][data-en]').forEach(function (el) {
+      const val = el.getAttribute(attr);
+      if (val == null) return;
+      // Use textContent when the value is plain text (safer for stray '&'),
+      // innerHTML when it contains markup (<em>, <br>, etc.)
+      if (el.tagName === 'OPTION')       el.textContent = val;
+      else if (val.indexOf('<') !== -1)  el.innerHTML   = val;
+      else                                el.textContent = val;
+    });
+
     // Hero lines (special markup)
     const lines = document.querySelectorAll('.hero__line');
     const lineKeys = ['hero_line1', 'hero_line2', 'hero_line3', 'hero_line4'];
